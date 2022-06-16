@@ -6,9 +6,9 @@ spec:
   selector:
     app: hive-metastore
   ports:
-    - protocol: TCP
-      port: 9083
-      targetPort: 9083
+  - protocol: TCP
+    port: 9083
+    targetPort: 9083
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -32,7 +32,7 @@ spec:
         image: ebosas/hive-metastore
         imagePullPolicy: Always        
         ports:
-          - containerPort: 9083
+        - containerPort: 9083
         volumeMounts:
         - name: metastore-cfg-vol
           mountPath: /opt/apache-hive-metastore-3.0.0-bin/conf/metastore-site.xml
