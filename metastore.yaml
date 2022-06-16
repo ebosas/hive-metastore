@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: hive-metastore
-        image: arempter/hive-metastore
+        image: ebosas/hive-metastore
         imagePullPolicy: Always        
         ports:
           - containerPort: 9083
