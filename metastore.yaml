@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hive-metastore
+spec:
+  selector:
+    app: hive-metastore
+  ports:
+    - protocol: TCP
+      port: 9083
+      targetPort: 9083
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metastore
+  labels:
+    app: hive-metastore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hive-metastore
+  template:
+    metadata:
+      labels:
+        app: hive-metastore
+    spec:
+      containers:
+      - name: hive-metastore
+        image: arempter/hive-metastore
+        imagePullPolicy: Always        
+        ports:
+          - containerPort: 9083
+        volumeMounts:
+        - name: metastore-cfg-vol
+          mountPath: /opt/apache-hive-metastore-3.0.0-bin/conf/metastore-site.xml
+          subPath: metastore-site.xml
+        - name: metastore-cfg-vol
+          mountPath: /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
+          subPath: core-site.xml
+        resources:
+          limits:
+            memory: 1G
+            cpu: 500m
+      volumes:
+        - name: metastore-cfg-vol
+          configMap:
+            name: metastore-cfg
