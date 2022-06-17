@@ -5,7 +5,7 @@ WORKDIR /opt
 ENV HADOOP_VERSION=3.2.0
 ENV METASTORE_VERSION=3.0.0
 
-RUN apt-get update && apt-get install -y netcat curl
+RUN apt-get update && apt-get install -y curl
 
 ENV HADOOP_HOME=/opt/hadoop-${HADOOP_VERSION}
 ENV HIVE_HOME=/opt/apache-hive-metastore-${METASTORE_VERSION}-bin

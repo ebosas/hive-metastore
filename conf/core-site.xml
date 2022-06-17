@@ -38,4 +38,9 @@
         <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
     </property> -->
 
+    <property>
+        <name>fs.azure.account.key.{account_name}.dfs.core.windows.net</name>
+        <value>{key}</value>
+    </property>
+
 </configuration>
